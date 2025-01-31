@@ -41,8 +41,13 @@ body {
 
 /* Google Map */
 #map {
-    flex: 1;
-    height: 100%;
+    width: 100%; /* Ensures it fits within the screen */
+    height: 300px; /* Adjust height for better visibility */
+}
+
+.map-container {
+    max-width: 100%;
+    overflow: hidden;
 }
 
 /* Search Form */
