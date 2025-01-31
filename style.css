@@ -150,11 +150,11 @@ button:hover {
 @media (max-width: 480px) {
     /* Further Optimize for Small Screens */
     .sidebar {
-        height: 65%;
+        height: 60%;
     }
     
     #map {
-        height: 35%;
+        height: 40%;
     }
 
     .app-title {
@@ -168,6 +168,6 @@ button:hover {
 
     button {
         font-size: 16px;
-        padding: 12px;
+        padding: 8px;
     }
 }
