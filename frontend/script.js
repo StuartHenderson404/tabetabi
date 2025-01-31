@@ -1,4 +1,4 @@
-const backendUrl = "http://localhost:3001/api/restaurants"; // Update with your backend URL
+const backendUrl = "https://tabetabi.onrender.com/api/restaurants"; // Update with your backend URL
 let map;
 let markers = [];
 let openInfoWindow = null; // Track the currently open info window
