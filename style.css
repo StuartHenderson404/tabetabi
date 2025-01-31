@@ -9,6 +9,20 @@ body {
     height: 100vh;
 }
 
+/* Stylish App Title */
+.app-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    color: #007BFF;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 20px 0;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+}
+
 /* App Container */
 .container {
     display: flex;
