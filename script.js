@@ -12,7 +12,6 @@ window.initMap = function () {
     map = new google.maps.Map(document.getElementById("map"), {
         center: hotelLocation,
         zoom: 15,
-        mapId: "YOUR_MAP_ID",
         styles: [
             {
                 featureType: "poi",
