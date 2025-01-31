@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <h1 class="app-title">食べ旅 🍽️</h1>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Sidebar (Search Form + Results) -->
+        <div class="sidebar">
+            <h2>では、何を食べたいでしょうか？</h2>
+            
+            <form id="searchForm">
+                <label for="cuisine">料理の種類:</label>
+                <select id="cuisine">
+                    <option value="italian">イタリアン</option>
+                    <option value="chinese">中華</option>
+                    <option value="japanese">和食</option>
+                    <option value="indian">インド料理</option>
+                    <option value="french">フレンチ</option>
+                    <option value="thai">タイ料理</option>
+                    <option value="korean">韓国料理</option>
+                    <option value="cafe">カフェ</option>
+                    <option value="sweets">スイーツ</option>
+                    <option value="burger">ハンバーガー</option>
+                    <option value="vietnamese">ベトナム料理</option>
+                    <option value="mexican">メキシコ料理</option>
+                    <option value="spanish">スペイン料理</option>
+                </select>
+
+                <label for="budget">予算:</label>
+                <select id="budget">
+                    <option value="low">💰 安い (〜$20)</option>
+                    <option value="medium">💰💰 普通 ($20-$50)</option>
+                    <option value="high">💰💰💰 高め ($50+)</option>
+                </select>
+
+                <button type="submit">検索</button>
+            </form>
+
+            <div id="results">
+                <p>検索結果がここに表示されます。</p>
+            </div>
+        </div>
+
+        <!-- Google Map -->
+        <div id="map"></div>
+    </div>
+
+    <!-- Google Maps API -->
+    <script async 
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEDscn6ozqihH2B_vi2msw_oAakcM4jT4&callback=initMap&libraries=marker">
+    </script>
+    
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
