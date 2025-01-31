@@ -32,7 +32,7 @@ body {
 
 /* Sidebar (Search + Results) */
 .sidebar {
-    width: 50%;
+    width: 35%;
     padding: 20px;
     background-color: white;
     box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
@@ -43,6 +43,8 @@ body {
 #map {
     flex: 1;
     height: 100%;
+    width: 100%;
+    border-radius: 10px;
 }
 
 /* Search Form */
@@ -60,23 +62,27 @@ body {
     display: block;
 }
 
+/* Dropdown */
 #searchForm select {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 18px; /* Increased font size */
+    background-color: #fff;
+    cursor: pointer;
 }
 
 /* Button */
 button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     background: #007BFF;
     color: white;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 18px; /* Increased font size */
     cursor: pointer;
     transition: background 0.3s ease;
 }
@@ -126,6 +132,42 @@ button:hover {
     
     #map {
         height: 60%;
+        width: 100%;
     }
 
+    /* Increase Readability on Mobile */
+    #searchForm select {
+        font-size: 20px;
+        padding: 14px;
+    }
+
+    button {
+        font-size: 20px;
+        padding: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Further Optimize for Small Screens */
+    .sidebar {
+        height: 45%;
+    }
+    
+    #map {
+        height: 55%;
+    }
+
+    .app-title {
+        font-size: 28px;
+    }
+
+    #searchForm select {
+        font-size: 22px;
+        padding: 16px;
+    }
+
+    button {
+        font-size: 22px;
+        padding: 16px;
+    }
 }
