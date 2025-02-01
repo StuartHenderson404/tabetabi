@@ -1,122 +1,136 @@
-/* General Reset */
-body {
-    font-family: 'Arial', sans-serif;
+/* Global Reset & Box-Sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #f8f9fa;
+}
+
+/* Body & Background */
+body {
+    font-family: 'Roboto', sans-serif; /* Consider linking a Google Font in your HTML */
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
+    color: #2c3e50;
 }
 
-/* Stylish App Title */
+/* App Title */
 .app-title {
     text-align: center;
-    font-size: 36px;
-    font-weight: bold;
-    color: #007BFF;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-    padding: 10px 0;
-    background: linear-gradient(90deg, #ff7e5f, #feb47b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    padding: 20px;
+    background: #ffffff;
+    border-bottom: 2px solid #ececec;
+    letter-spacing: 1px;
 }
 
-/* App Container */
+/* Main Container */
 .container {
     display: flex;
-    flex-direction: row;
-    height: 100vh;
+    flex: 1;
 }
 
 /* Sidebar (Search + Results) */
 .sidebar {
     width: 35%;
+    background: #ffffff;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
     padding: 20px;
-    background-color: white;
-    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
 }
 
-/* Google Map */
+/* Google Map Section */
 #map {
     flex: 1;
-    height: 100%;
-    width: 100%;
-    border-radius: 10px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Search Form */
+/* Search Form Styling */
 #searchForm {
-    background: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 15px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 #searchForm label {
-    font-weight: bold;
-    margin-bottom: 5px;
     display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #34495e;
 }
 
-/* Dropdown */
-#searchForm select {
+#searchForm select,
+#searchForm input {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    border: 1px solid #bdc3c7;
     border-radius: 5px;
-    font-size: 14px; /* Increased font size */
+    font-size: 1rem;
     background-color: #fff;
-    cursor: pointer;
+    transition: border-color 0.3s ease;
 }
 
-/* Button */
+#searchForm select:focus,
+#searchForm input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Button Styling */
 button {
     width: 100%;
     padding: 12px;
-    background: #007BFF;
-    color: white;
+    font-size: 1rem;
+    font-weight: bold;
     border: none;
     border-radius: 5px;
-    font-size: 14px; /* Increased font size */
+    background: linear-gradient(90deg, #3498db, #2980b9);
+    color: #ffffff;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background: #0056b3;
+    background: linear-gradient(90deg, #2980b9, #3498db);
+    transform: translateY(-2px);
 }
 
 /* Search Results */
 #results {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .result-item {
-    background: white;
+    background: #ffffff;
+    border-left: 4px solid #3498db;
+    border-radius: 5px;
     padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
+    margin-bottom: 15px;
+    transition: box-shadow 0.3s ease;
 }
 
 .result-item:hover {
-    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .result-item h3 {
-    margin: 0;
-    color: #333;
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+    color: #2c3e50;
 }
 
 .result-item p {
-    font-size: 14px;
-    color: #666;
+    font-size: 0.9rem;
+    color: #7f8c8d;
 }
 
 /* Responsive Design */
@@ -127,47 +141,32 @@ button:hover {
     
     .sidebar {
         width: 100%;
-        height: 30%;
+        height: 35%;
     }
     
     #map {
-        height: 40%;
-        width: 100%;
-    }
-
-    /* Increase Readability on Mobile */
-    #searchForm select {
-        font-size: 16px;
-        padding: 12px;
-    }
-
-    button {
-        font-size: 16px;
-        padding: 12px;
+        margin: 10px;
+        height: 50%;
     }
 }
 
 @media (max-width: 480px) {
-    /* Further Optimize for Small Screens */
+    .app-title {
+        font-size: 2rem;
+    }
+    
+    #searchForm select,
+    #searchForm input,
+    button {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+    
     .sidebar {
-        height: 60%;
+        height: 50%;
     }
     
     #map {
         height: 40%;
-    }
-
-    .app-title {
-        font-size: 28px;
-    }
-
-    #searchForm select {
-        font-size: 16px;
-        padding: 12px;
-    }
-
-    button {
-        font-size: 16px;
-        padding: 8px;
     }
 }
