@@ -3,11 +3,12 @@ let map;
 let markers = [];
 let openInfoWindow = null; // Track the currently open info window
 
+// Initialize the Google Map
 window.initMap = function () {
     console.log("Initializing map...");
 
     // Set the initial map center to the hotel location
-    const hotelLocation = { lat: -36.84830052813565, lng: 174.76369793295038 }; // Replace with actual hotel coordinates -36.84830052813565, 174.76369793295038
+    const hotelLocation = { lat: -36.84830052813565, lng: 174.76369793295038 };
 
     map = new google.maps.Map(document.getElementById("map"), {
         center: hotelLocation,
@@ -29,34 +30,35 @@ window.initMap = function () {
                 stylers: [{ color: "#eaeaea" }],
             },
         ],
-    });   
-
+    });
     console.log("Map initialized successfully!");
 
-    // Create a hotel marker with a label
+    // Create a marker for the hotel
     const hotelMarker = new google.maps.Marker({
         position: hotelLocation,
         map: map,
         title: "Hotel",
         icon: {
-            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Blue pin for the hotel
+            url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Blue marker for the hotel
         },
     });
-
     console.log("Hotel marker added.");
 };
 
-// Event listener for search form submission
+// Listen for the search form submission
 document.getElementById("searchForm").addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent page refresh
 
     const cuisine = document.getElementById("cuisine").value;
     const budget = document.getElementById("budget").value;
 
-    // Fetch restaurant data from the backend
-    fetch(`${backendUrl}?cuisine=${cuisine}&budget=${budget}`)
-        .then(response => response.json())
-        .then(data => {
+    // Encode parameters to handle special characters
+    const encodedCuisine = encodeURIComponent(cuisine);
+    const encodedBudget = encodeURIComponent(budget);
+
+    fetch(`${backendUrl}?cuisine=${encodedCuisine}&budget=${encodedBudget}`)
+        .then((response) => response.json())
+        .then((data) => {
             console.log("Full API Response:", data);
 
             if (!data || data.length === 0) {
@@ -67,7 +69,7 @@ document.getElementById("searchForm").addEventListener("submit", function (event
 
             displayResults(data);
         })
-        .catch(error => console.error("Error fetching restaurant data:", error));
+        .catch((error) => console.error("Error fetching restaurant data:", error));
 });
 
 // Function to display restaurant search results and update map markers
@@ -82,15 +84,16 @@ function displayResults(restaurants) {
 
     console.log("Displaying results:", restaurants);
 
-    // Clear old markers
-    markers.forEach(marker => marker.setMap(null));
+    // Clear old markers from the map
+    markers.forEach((marker) => marker.setMap(null));
     markers = [];
 
-    restaurants.forEach(restaurant => {
+    restaurants.forEach((restaurant) => {
+        // Create a result item element for each restaurant
         const restaurantElement = document.createElement("div");
         restaurantElement.classList.add("result-item");
 
-        // Convert price level to money bag symbols
+        // Convert price level to money bag symbols (or "不明" if unavailable)
         const priceIcons = restaurant.price_level ? "💰".repeat(restaurant.price_level) : "不明";
 
         restaurantElement.innerHTML = `
@@ -98,13 +101,16 @@ function displayResults(restaurants) {
             <p>評価: ${restaurant.rating || "なし"} ⭐</p>
             <p>住所: ${restaurant.vicinity || "不明"}</p>
             <p>価格レベル: ${priceIcons}</p>
-            ${restaurant.website ? `<p><a href="${restaurant.website}" target="_blank">公式ウェブサイト</a></p>` : "<p>ウェブサイト情報なし</p>"}
+            ${
+                restaurant.website
+                    ? `<p><a href="${restaurant.website}" target="_blank">公式ウェブサイト</a></p>`
+                    : "<p>ウェブサイト情報なし</p>"
+            }
             <a href="https://www.google.com/maps/search/?api=1&query=${restaurant.geometry?.location?.lat},${restaurant.geometry?.location?.lng}" target="_blank">Googleマップで見る</a>
         `;
-
         resultsContainer.appendChild(restaurantElement);
 
-        // Add restaurant markers with click-to-show name
+        // Create a marker for the restaurant on the map
         const marker = new google.maps.Marker({
             position: {
                 lat: restaurant.geometry.location.lat,
@@ -112,25 +118,31 @@ function displayResults(restaurants) {
             },
             map: map,
             icon: {
-                url: "http://maps.google.com/mapfiles/ms/icons/orange-dot.png", // Orange pin for visibility
+                url: "http://maps.google.com/mapfiles/ms/icons/orange-dot.png", // Orange marker for restaurants
             },
         });
 
-        // Create an info window with the restaurant name
+        // Create an info window for the restaurant
         const infoWindow = new google.maps.InfoWindow({
             content: `<strong>${restaurant.name}</strong>`,
         });
 
-        // Add click event to open the info window and close the previous one
+        // Set up the marker click event to open its info window
         marker.addListener("click", () => {
             if (openInfoWindow) {
-                openInfoWindow.close(); // Close the previously open info window
+                openInfoWindow.close(); // Close any previously open info window
             }
             infoWindow.open(map, marker);
-            openInfoWindow = infoWindow; // Store the new open info window
+            openInfoWindow = infoWindow;
         });
 
+        // When a result is clicked, center the map on its marker and trigger the marker's click event
+        restaurantElement.addEventListener("click", () => {
+            map.setCenter(marker.getPosition());
+            google.maps.event.trigger(marker, "click");
+        });
+
+        // Save the marker for potential later removal
         markers.push(marker);
     });
-
 }
