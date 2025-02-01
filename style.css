@@ -9,7 +9,7 @@
 
 /* Body & Background */
 body {
-    font-family: 'Roboto', sans-serif; /* Make sure to load this font in your HTML if using it */
+    font-family: 'Roboto', sans-serif; /* Ensure you include this font in your HTML */
     background: linear-gradient(135deg, #fdfbfb, #ebedee);
     display: flex;
     flex-direction: column;
@@ -32,9 +32,10 @@ body {
 .container {
     display: flex;
     flex: 1;
-    overflow: hidden; /* Prevent the overall page from scrolling */
-    gap: 20px; /* Adds space between the sidebar and map */
+    align-items: flex-start;  /* Prevent children from stretching to match the tallest */
+    overflow: hidden;         /* Prevent overall page scroll */
     padding: 20px;
+    gap: 20px;
 }
 
 /* Sidebar (Search + Results) */
@@ -43,15 +44,16 @@ body {
     background: #ffffff;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
     padding: 20px;
-    overflow-y: auto; /* Enables independent scrolling for the sidebar */
+    overflow-y: auto;        /* Enables independent scrolling */
+    max-height: 100vh;       /* Prevents the sidebar from exceeding the viewport height */
 }
 
-/* Google Map Section */
+/* Google Map Section - Desktop */
 #map {
-    flex: 1;
+    width: 65%;
+    height: 600px;           /* Fixed map height on desktop */
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    /* Removed margin so that spacing is controlled by the container's gap */
 }
 
 /* Search Form Styling */
@@ -140,13 +142,13 @@ button:hover {
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
-        height: 100vh; /* Use the full viewport height */
+        height: 100vh;  /* Use the full viewport height */
         padding: 0;
         gap: 0;
     }
     
     .sidebar {
-        flex: 0 0 60vh; /* Sidebar occupies 60% of the viewport height */
+        flex: 0 0 60vh;  /* Sidebar occupies 60% of the viewport height */
         width: 100%;
         overflow-y: auto;
         box-shadow: none;
@@ -155,7 +157,9 @@ button:hover {
     }
     
     #map {
-        flex: 0 0 40vh; /* Map occupies 40% of the viewport height */
+        flex: 0 0 40vh;  /* Map occupies 40% of the viewport height */
+        width: 100%;
+        height: auto;    /* Let the map adjust automatically */
         border-radius: 0;
         box-shadow: none;
     }
