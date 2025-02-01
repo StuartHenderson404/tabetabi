@@ -133,6 +133,4 @@ function displayResults(restaurants) {
         markers.push(marker);
     });
 
-    // Center the map on the first restaurant if results exist
-
 }
