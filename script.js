@@ -134,10 +134,5 @@ function displayResults(restaurants) {
     });
 
     // Center the map on the first restaurant if results exist
-    if (restaurants.length > 0) {
-        map.setCenter({
-            lat: restaurants[0].geometry.location.lat,
-            lng: restaurants[0].geometry.location.lng,
-        });
-    }
+
 }
