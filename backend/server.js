@@ -49,6 +49,10 @@ app.get("/api/restaurants", async (req, res) => {
             searchKeywords = "chocolate, ice cream, gelato, dessert, sweets, milkshake, cake, cafe";
         }
 
+        // Special case: If searching for "meat," adjust search keywords
+        if (cuisine === "meat") {
+            searchKeywords = "barbeque, BBQ, meat, American, american, steak";
+        }
         console.log(`Fetching restaurants for cuisine: ${cuisine} (search term: ${searchKeywords}), price range: ${minPrice}-${maxPrice}`);
 
         // Google Places API Nearby Search URL
