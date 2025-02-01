@@ -51,7 +51,7 @@ body {
 /* Google Map Section - Desktop */
 #map {
     width: 65%;
-    height: 600px;           /* Fixed map height on desktop */
+    height: 800px;           /* Fixed map height on desktop */
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
