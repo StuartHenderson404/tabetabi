@@ -66,7 +66,7 @@ app.get("/api/restaurants", async (req, res) => {
             return res.status(500).json({ error: "Failed to fetch restaurant data from Google" });
         }
 
-        let results = data.results.slice(0, 15); // Limit results to 6 restaurants
+        let results = data.results.slice(0, 25); // Limit results to 50 restaurants
         console.log(`Fetched ${results.length} restaurants`);
 
         // Fetch additional details for each restaurant (website & price level)
