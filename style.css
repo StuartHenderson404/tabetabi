@@ -9,7 +9,7 @@
 
 /* Body & Background */
 body {
-    font-family: 'Roboto', sans-serif; /* Consider linking this Google Font in your HTML */
+    font-family: 'Roboto', sans-serif; /* Remember to include this font in your HTML if desired */
     background: linear-gradient(135deg, #fdfbfb, #ebedee);
     display: flex;
     flex-direction: column;
@@ -32,6 +32,10 @@ body {
 .container {
     display: flex;
     flex: 1;
+    /* Prevent the entire container from scrolling */
+    overflow: hidden;
+    /* Use padding for overall spacing instead of margins on child elements */
+    padding: 20px;
 }
 
 /* Sidebar (Search + Results) */
@@ -40,15 +44,16 @@ body {
     background: #ffffff;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
     padding: 20px;
-    overflow-y: auto;
+    overflow-y: auto; /* Enable independent scrolling */
 }
 
 /* Google Map Section */
 #map {
     flex: 1;
-    margin: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    /* Instead of a full margin, we add left spacing only, so the map remains in place */
+    margin-left: 20px;
 }
 
 /* Search Form Styling */
@@ -138,6 +143,7 @@ button:hover {
     .container {
         flex-direction: column;
         height: 100vh; /* Ensure the container fills the viewport */
+        padding: 0; /* Remove extra padding for full use of viewport space */
     }
     
     .sidebar {
@@ -145,12 +151,17 @@ button:hover {
         flex: 0 0 60vh;
         width: 100%;
         overflow-y: auto;
+        box-shadow: none;
+        border-bottom: 1px solid #ececec;
+        padding: 20px;
     }
     
     #map {
         /* Fix the map height to the remaining 40% of the viewport */
         flex: 0 0 40vh;
-        margin: 10px;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
     }
 }
 
@@ -167,9 +178,7 @@ button:hover {
         padding: 10px;
     }
     
-    /* Optionally adjust the heights if needed */
     .sidebar {
-        /* You can adjust the viewport split if required */
         flex: 0 0 60vh;
     }
     
